@@ -7,14 +7,14 @@ import luigi
 import pandas
 import os
 from feature_builder import FeatureBuilder
-from regressor import train_model_ridge
+from regressor import train_model_ridge,train_random_forest,train_model_with_grid_search
 from sklearn.externals import joblib
 
 
 class TrainDataIngestion(luigi.Task):
 
     def run(self):
-        df_data = pandas.read_csv(os.path.join(os.getcwd(),"data","train.csv"))
+        df_data = pandas.read_csv(os.path.join(os.getcwd(), "data", "train.csv"))
         df_data.to_csv(self.output().path, index=False)
 
     def output(self):
@@ -24,7 +24,7 @@ class TrainDataIngestion(luigi.Task):
 class StoreDataIngestion(luigi.Task):
 
     def run(self):
-        df_stores_data = pandas.read_csv(os.path.join(os.getcwd(),"data","store.csv"))
+        df_stores_data = pandas.read_csv(os.path.join(os.getcwd(), "data", "store.csv"))
         df_stores_data.to_csv(self.output().path, index=False)
 
     def output(self):
@@ -69,12 +69,12 @@ class Train(luigi.Task):
         return DataPreProcessing()
 
     def run(self):
-        sales_model = train_model_ridge(pandas.read_csv(DataPreProcessing().output().path))
-        joblib.dump(sales_model,self.output().path)
+        sales_model = train_random_forest(pandas.read_csv(DataPreProcessing().output().path))
+        joblib.dump(sales_model, self.output().path)
 
     def output(self):
         return luigi.LocalTarget("/tmp/rossman_sales_model.pkl")
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     luigi.run()

@@ -27,8 +27,12 @@ $ sh build.sh
 * Historical Tasks can also be viewed by http://localhost:8082/history
 
 
+### Known Issues
+------------------------
 
-
+* Using the SkLearn n_jobs > 1 for Scikit Learn Modules like GridSearchCV and others will cause an error.
+* This may be due to the the Process Assignment ID of Luigi using the Central Scheduler.
+* In case of --local-scheduler flag the error is not reproduced.
 
 
 

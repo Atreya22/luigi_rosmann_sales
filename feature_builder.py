@@ -21,9 +21,7 @@ class FeatureBuilder():
         self.handle_missing_value()
         dataframe = pandas.get_dummies(dataframe)
         print dataframe.head()
-        dataframe = self.clean(dataframe)
         return dataframe
-
 
     def feature_engineering(self, dataframe=None):
         date1 = [datetime.datetime.strptime(i, '%Y-%m-%d') for i in dataframe.Date]
@@ -41,12 +39,4 @@ class FeatureBuilder():
 
     def handle_missing_value(self):
         self.dataframe.fillna(0, inplace=True)
-
-    def clean(self,df):
-        print "Cleaning Unnamed"
-        for col in df.columns:
-            if 'Unnamed' in col:
-                print col
-                del df[col]
-        return df
 
