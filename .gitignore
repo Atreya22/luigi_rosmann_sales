@@ -1,0 +1,6 @@
+# Created by .ignore support plugin (hsz.mobi)
+venv/
+.idea/libraries/*
+.idea/vcs.xml
+*.pyc
+.coverage
