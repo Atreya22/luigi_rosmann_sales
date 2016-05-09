@@ -1,5 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
 venv/
+.idea/*
 .idea/libraries/*
 .idea/vcs.xml
 *.pyc

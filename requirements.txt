@@ -1,0 +1,6 @@
+numpy
+scipy
+pandas
+luigi==2.0.1
+scikit-learn
+sqlalchemy
