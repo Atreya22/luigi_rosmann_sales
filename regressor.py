@@ -12,14 +12,17 @@ target_variable = ["Sales"]
 
 
 def train_model_ridge(dataframe):
+    model_object = {}
     print "Training Ridge Regression"
-    print dataframe.columns
+    print dataframe.columns.tolist()
     ridge = linear_model.Ridge(alpha=0.5)
     X_train, X_test, y_train, y_test = train_test_split(dataframe.drop(target_variable, axis=1),
                                                         dataframe.Sales)
     model = ridge.fit(X_train, y_train)
     model.fit(X_train, y_train)
-    return model
+    model_object["model"] = model
+    model_object["training_features"] = X_train.columns.tolist()
+    return model_object
 
 
 def train_model_with_grid_search(dataframe):

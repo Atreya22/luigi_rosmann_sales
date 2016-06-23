@@ -8,7 +8,8 @@ import pandas
 import os
 from feature_builder import FeatureBuilder
 from regressor import train_model_ridge,train_random_forest,train_model_with_grid_search
-from sklearn.externals import joblib
+import pickle
+from urllib2 import Request,urlopen,URLError
 
 
 class TrainDataIngestion(luigi.Task):
@@ -69,8 +70,17 @@ class Train(luigi.Task):
         return DataPreProcessing()
 
     def run(self):
-        sales_model = train_random_forest(pandas.read_csv(DataPreProcessing().output().path))
-        joblib.dump(sales_model, self.output().path)
+        sales_model = train_model_ridge(pandas.read_csv(DataPreProcessing().output().path))
+        with open(self.output().path, 'wb') as f:
+            pickle.dump(sales_model,f )
+        request = Request('http://127.0.0.1:5000/loadModels/')
+        try:
+            print "Reloading models"
+            response = urlopen(request)
+        except URLError, e:
+            "No Roseman Sales Prediction API", e
+
+
 
     def output(self):
         return luigi.LocalTarget("/tmp/rossman_sales_model.pkl")
