@@ -7,6 +7,10 @@ orchestrate the various tasks.
 
 It uses [Luigi](https://github.com/spotify/luigi) to orchestrate the pipeline of the batch jobs.
 
+### Videos 
+* [PyCon Singapore, 2016](https://engineers.sg/video/machine-learning-pipeline-using-luigi-and-scikit-learn-pyconsg-2016--878)
+* [PyData Singapore Meetup] (https://engineers.sg/video/a-machine-learning-data-pipeline-pydata-sg--723)
+
 ## Installation 
 ===============
 ### Python
